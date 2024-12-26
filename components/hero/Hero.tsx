@@ -7,7 +7,7 @@ import SocialLinks from "./social-links";
 import useHeroData from "../../hooks/useHeroData";
 
 const Hero = () => {
-  const { data, isLoading, error } = useHeroData();
+  const { data, isLoading, error } = useHeroData({ itemQuantity: 1 });
   return (
     <>
       <div className="fixed flex items-center justify-center top-[10rem] left-[1rem] cursor-pointer tablet:top-[10rem] tablet:left-[2rem] laptop:top-[20rem] laptop:left-[7rem]">

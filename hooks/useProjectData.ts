@@ -9,7 +9,11 @@ export interface ProjectType {
   skills: string[];
 }
 
-export default function useProjectData() {
+export default function useProjectData({
+  itemQuantity,
+}: {
+  itemQuantity: number;
+}) {
   const [data, setData] = useState<ProjectType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +23,7 @@ export default function useProjectData() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<ProjectType>("projects", 3)
+    fetchFirestoreData<ProjectType>("projects", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);
@@ -53,6 +57,7 @@ export default function useProjectData() {
   }, [data, selectedSkill]);
 
   return {
+    data,
     filteredProjects,
     selectedSkill,
     setSelectedSkill,

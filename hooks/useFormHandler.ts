@@ -1,37 +1,20 @@
 import { useState } from "react";
-import {
-  handleSubmitToAPI,
-  prepareFormData,
-} from "../components/dashboard/form-service";
+import { dashboardCRUD } from "../components/dashboard/dashboard-crud";
 
-export interface FormData {
-  category: string;
-  name: string;
-  title: string;
-  description: string;
-  feedback: string;
-  techStack: string;
-  file: File | null;
-}
+export default function useFormHandler<T extends { id: string }>(
+  initialData: T[],
+  category: string
+) {
+  const [collectionData, setCollectionData] = useState<T[]>(initialData);
+  const [editingItem, setEditingItem] = useState<T | null>(null);
 
-export default function useFormHandler() {
-  const [formData, setFormData] = useState<FormData>({
-    category: "",
-    name: "",
-    title: "",
-    description: "",
-    feedback: "",
-    techStack: "",
-    file: null,
-  });
+  const [formData, setFormData] = useState<Record<string, any>>({});
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,29 +22,49 @@ export default function useFormHandler() {
     setFormData((prevData) => ({ ...prevData, file }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const startEditing = (item: T) => {
+    setEditingItem(item);
+    setFormData(item);
+  };
 
+  const saveItem = async () => {
     try {
-      const preparedData = prepareFormData(formData);
-      let storedData = await handleSubmitToAPI(preparedData);
-      if (storedData !== undefined) {
-        alert("Form submitted successfully!");
-      }
-
-      setFormData({
-        category: "",
-        name: "",
-        title: "",
-        description: "",
-        feedback: "",
-        techStack: "",
-        file: null,
-      });
+      const updatedItem = await dashboardCRUD.saveItem(
+        formData,
+        category,
+        editingItem?.id
+      );
+      setCollectionData((prev) =>
+        prev.map((item) => (item.id === updatedItem?.id ? updatedItem : item))
+      );
+      cancelEditing();
     } catch (error) {
-      console.error("Error while submitting form:", error);
-      alert("An error occurred while submitting the form. Please try again.");
+      console.error("Error saving item:", error);
     }
   };
-  return { formData, handleInputChange, handleSubmit, handleFileChange };
+
+  const cancelEditing = () => {
+    setEditingItem(null);
+    setFormData({});
+  };
+
+  const deleteItem = async (id: string) => {
+    try {
+      await dashboardCRUD.deleteItem(category, id);
+      setCollectionData((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
+  return {
+    collectionData,
+    formData,
+    handleInputChange,
+    handleFileChange,
+    saveItem,
+    deleteItem,
+    startEditing,
+    cancelEditing,
+  };
 }

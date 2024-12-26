@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../lib/firebase";
-import axios from "axios";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -11,22 +10,21 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [createAdminWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      const userCredential = await createAdminWithEmailAndPassword(
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
         email,
         password
       );
-      const uid = userCredential?.user?.uid;
 
-      if (!uid) {
+      const user = userCredential?.user
+
+      if (!user) {
         throw new Error("Not permitted as admin.");
       }
     } catch (authError: any) {
@@ -44,7 +42,7 @@ const LoginForm = () => {
       className="max-w-4xl mx-auto p-6 bg-slate-400 rounded-md shadow-md space-y-6"
     >
       <h2 className="text-2xl font-bold mb-6 text-gray-700 text-center">
-        Create Admin
+        Login as Admin
       </h2>
       {error && <p className="text-red-500">{error}</p>}
       <div className="mb-4">
@@ -86,7 +84,7 @@ const LoginForm = () => {
         }`}
         disabled={loading}
       >
-        {loading ? "Creating..." : "Create Admin"}
+        {loading ? "loading..." : "login as Admin"}
       </button>
     </form>
   );

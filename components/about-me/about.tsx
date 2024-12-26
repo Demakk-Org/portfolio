@@ -5,7 +5,7 @@ import React from "react";
 import useAboutMeData from "../../hooks/useAboutMeData";
 
 const AboutMe = () => {
-  const { data, isLoading, error } = useAboutMeData();
+  const { data, isLoading, error } = useAboutMeData({ itemQuantity: 1 });
 
   return (
     <div>

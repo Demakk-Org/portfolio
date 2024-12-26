@@ -9,14 +9,14 @@ export interface TestimonialType {
   feedback: string;
 }
 
-const useTestimonialData = () => {
+const useTestimonialData = ({ itemQuantity }: { itemQuantity: number }) => {
   const [data, setData] = useState<TestimonialType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<TestimonialType>("testimonials", 5)
+    fetchFirestoreData<TestimonialType>("testimonials", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);

@@ -8,7 +8,7 @@ import SideNav from "./side-navigation";
 import useUploadCVData from "../../hooks/useUploadCVData";
 
 const Navbar = () => {
-  const { data, isLoading, error } = useUploadCVData();
+  const { data, isLoading, error } = useUploadCVData({ itemQuantity: 1 });
   const [isScrolled, setIsScrolled] = useState(false);
 
   const desktopClassName =

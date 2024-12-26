@@ -13,7 +13,7 @@ import useTestimonialData, {
 } from "../../hooks/useTestimonialData";
 
 const TestimonialsSection = () => {
-  const { data, isLoading, error } = useTestimonialData();
+  const { data, isLoading, error } = useTestimonialData({ itemQuantity: 5 });
 
   return (
     <section

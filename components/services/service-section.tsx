@@ -4,7 +4,7 @@ import useServiceData, { ServiceType } from "../../hooks/useServiceData";
 import ServiceCard from "./service-card";
 
 const ServiceSection = () => {
-  const { data, isLoading, error } = useServiceData();
+  const { data, isLoading, error } = useServiceData({ itemQuantity: 4 });
 
   return (
     <section
@@ -29,6 +29,7 @@ const ServiceSection = () => {
               title={service.title}
               description={service.description}
               imageUrl={service.imageUrl}
+              id={""}
             />
           ))
         )}

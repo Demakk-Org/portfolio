@@ -11,7 +11,7 @@ const ProjectSection = () => {
     isLoading,
     error,
     allSkills,
-  } = useProjectData();
+  } = useProjectData({itemQuantity:3});
 
   return (
     <section
