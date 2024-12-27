@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import useAboutMeData from "../../hooks/useAboutMeData";
+import imagePlaceholder from "../../public/subtract.png";
 
 const AboutMe = () => {
   const { data, isLoading, error } = useAboutMeData({ itemQuantity: 1 });
@@ -17,7 +18,7 @@ const AboutMe = () => {
           <div className="rounded-full overflow-hidden h-[200px] w-[200px] relative  desktop:h-[300px] desktop:w-[300px]">
             {data.map((image, index) => (
               <Image
-                src={image.imageUrl}
+                src={image.imageUrl || imagePlaceholder}
                 alt={`Image ${index}`}
                 key={index}
                 className="object-cover"

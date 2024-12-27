@@ -1,13 +1,6 @@
-import React, { useState } from "react";
-import useFormHandler from "../../hooks/useFormHandler";
-import Table from "./table";
-import Modal from "./modal";
-import ServiceItem from "./service-item";
-import { formFields, tableHeaders } from "./form-field";
-import Form from "./form";
+import React from "react";
 import AddNewData from "./add-data";
 import EditDeleteData from "./edit-delete-data";
-// import AddNewData from "./add-data";
 
 export interface DataItem {
   createdAt: any;

@@ -21,7 +21,7 @@ export const formFields: { [key: string]: any[] } = {
     { name: "imageUrl", label: "Image URL", type: "text" },
   ],
   aboutMe: [
-    { name: "skills", label: "Skills (comma-separated)", type: "text" },
+    { name: "techStack", label: "Skills (comma-separated)", type: "text" },
     { name: "imageUrl", label: "Image URL", type: "text" },
   ],
   uploadCV: [{ name: "cvUrl", label: "CV URL", type: "text" }],

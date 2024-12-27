@@ -9,7 +9,7 @@ import useUploadCVData from "../../../hooks/useUploadCVData";
 const Page = () => {
   const { data, isLoading, error } = useUploadCVData({ itemQuantity: 1 });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="p-[300px]">Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (

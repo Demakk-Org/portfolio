@@ -9,7 +9,7 @@ import useServiceData from "../../../hooks/useServiceData";
 const Page = () => {
   const { data, isLoading, error } = useServiceData({ itemQuantity: 10 });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="min-w-full p-[300px]">Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (

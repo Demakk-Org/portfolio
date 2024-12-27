@@ -4,14 +4,14 @@ import Form from "./form";
 import Modal from "./modal";
 import ServiceItem from "./service-item";
 import Table from "./table";
-import useFormHandler from "../../hooks/useFormHandler";
+import useFormHandler, { FormDataTypes } from "../../hooks/useFormHandler";
 import { formFields, tableHeaders } from "./form-field";
 
 export default function EditDeleteData<T extends DataItem>({
   data,
   category,
 }: EditDataProps<T>) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const {
     collectionData,
@@ -41,7 +41,11 @@ export default function EditDeleteData<T extends DataItem>({
             <td className="flex px-6 py-4">
               <button
                 onClick={() => {
-                  startEditing(row);
+                  // startEditing(row);
+                  startEditing({
+                    ...row,
+                    name: row.name || "",
+                  } as FormDataTypes);
                   setIsEditing(true);
                 }}
                 className="px-4 py-2 text-white bg-blue-500 rounded-md"

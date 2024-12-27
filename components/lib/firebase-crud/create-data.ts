@@ -17,7 +17,7 @@ export const createFirestoreData = async ({
     });
 
     if (docRef) {
-      alert(`Document created to ${category} categoty`);
+      alert(`Document created to ${category} category`);
     }
   } catch (e) {
     console.error("Error while creating data:", e);

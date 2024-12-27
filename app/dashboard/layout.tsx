@@ -18,10 +18,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       try {
         if (user) {
-          const idTokenResult = await user.getIdTokenResult(true);
-
-          console.log("User token claims:", idTokenResult);
-
           if (user.email === email) {
             setIsAuthorized(true);
           } else {
@@ -48,10 +44,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       {isAuthorized ? (
         <div className="mx-5 flex ">
-          <div className="bg-blue-300 rounded-lg">
+          <div className="static bg-blue-300 rounded-lg">
             <SideNav />
           </div>
-          <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+          <div className="md:overflow-y-auto">
             {children}
           </div>
         </div>

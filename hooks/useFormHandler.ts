@@ -1,14 +1,32 @@
 import { useState } from "react";
 import { dashboardCRUD } from "../components/dashboard/dashboard-crud";
+import prepareFormData from "../components/dashboard/update-form";
+
+export interface FormDataTypes {
+  id?: string;
+  name: string;
+  title: string;
+  description: string;
+  feedback: string;
+  techStack: string;
+  file: File | null;
+}
 
 export default function useFormHandler<T extends { id: string }>(
   initialData: T[],
   category: string
 ) {
   const [collectionData, setCollectionData] = useState<T[]>(initialData);
-  const [editingItem, setEditingItem] = useState<T | null>(null);
+  const [editingItem, setEditingItem] = useState<FormDataTypes | null>(null);
 
-  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [formData, setFormData] = useState<FormDataTypes>({
+    name: "",
+    title: "",
+    description: "",
+    feedback: "",
+    techStack: "",
+    file: null,
+  });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -22,16 +40,33 @@ export default function useFormHandler<T extends { id: string }>(
     setFormData((prevData) => ({ ...prevData, file }));
   };
 
-  const startEditing = (item: T) => {
-    setEditingItem(item);
-    setFormData(item);
+  const startEditing = (item: FormDataTypes) => {
+    // setEditingItem(item);
+    setEditingItem({
+      name: item.name,
+      title: item.title,
+      description: item.description,
+      feedback: item.feedback,
+      techStack: item.techStack,
+      file: null,
+    });
+    setFormData({
+      name: item.name,
+      title: item.title,
+      description: item.description,
+      feedback: item.feedback,
+      techStack: item.techStack,
+      file: null,
+    });
   };
 
   const saveItem = async () => {
     try {
+      const { updatedFormData, file } = prepareFormData(formData, category);
       const updatedItem = await dashboardCRUD.saveItem(
-        formData,
+        updatedFormData,
         category,
+        file,
         editingItem?.id
       );
       setCollectionData((prev) =>
@@ -45,7 +80,14 @@ export default function useFormHandler<T extends { id: string }>(
 
   const cancelEditing = () => {
     setEditingItem(null);
-    setFormData({});
+    setFormData({
+      name: "",
+      title: "",
+      description: "",
+      feedback: "",
+      techStack: "",
+      file: null,
+    });
   };
 
   const deleteItem = async (id: string) => {

@@ -9,7 +9,7 @@ import UpdateDashboardData, {
 const Page = () => {
   const { data, isLoading, error } = useTestimonialData({ itemQuantity: 10 });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div  className="p-[300px]">Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   return (
     <>

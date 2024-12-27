@@ -4,23 +4,21 @@ import uploadFile from "../lib/firebase-crud/storage";
 import updateFirestoreData from "../lib/firebase-crud/update-data";
 
 export const dashboardCRUD = {
-  async saveItem(data: any, category: string, id?: string) {
+  async saveItem(formData: any, category: string, file: any, id?: string) {
     // Handle file upload
-    if (data.file) {
+    if (file) {
       const folder = category === "uploadCV" ? "cv" : "images";
-      const fileUrl = await uploadFile(folder, data.file, category);
-      data[category === "uploadCV" ? "cvUrl" : "imageUrl"] = fileUrl;
-
-      delete data.file;
+      const fileUrl = await uploadFile(folder, file, category);
+      formData[category === "uploadCV" ? "cvUrl" : "imageUrl"] = fileUrl;
     }
 
     if (id) {
       // Update Firestore document
-      await updateFirestoreData({ category, docId: id, data });
-      return { ...data, id };
+      await updateFirestoreData({ category, docId: id, formData });
+      return { ...formData, id };
     } else {
       // Create new document
-      const newDoc = await createFirestoreData({ data, category });
+      const newDoc = await createFirestoreData({ data: formData, category });
       return newDoc;
     }
   },
