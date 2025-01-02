@@ -1,6 +1,10 @@
 import { FormDataTypes } from "../../hooks/useFormHandler";
+import { CategoryType } from "../../types/type";
 
-export default function prepareFormData(formData: FormDataTypes, category: string) {
+export default function prepareFormData(
+  formData: FormDataTypes,
+  category: CategoryType
+) {
   const techStackArray = formData.techStack
     ? formData.techStack
         .split(",")
@@ -39,8 +43,14 @@ export default function prepareFormData(formData: FormDataTypes, category: strin
       };
       break;
   }
+  if (formData.file) {
+    data = {
+      ...data,
+      file: formData.file,
+    };
+  }
+
   return {
     updatedFormData: data,
-    file: formData.file,
   };
 }

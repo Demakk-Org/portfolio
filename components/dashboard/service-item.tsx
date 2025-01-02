@@ -1,5 +1,5 @@
 import React from "react";
-import { DataItem } from "./update-dashboard-data";
+import { DataItem } from "../../types/type";
 
 interface ServiceItemProps<T extends DataItem> {
   row: T;

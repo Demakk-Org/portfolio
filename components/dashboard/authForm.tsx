@@ -1,39 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import { auth } from "../lib/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import useAuthHandler from "../../hooks/useDashboardAuthHandler";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const {
+    error,
+    loading,
+    email,
+    password,
+    handleLogin: originalHandleLogin,
+    handleEmailChange,
+    handlePasswordChange,
+  } = useAuthHandler();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+  const [validationError, setValidationError] = useState("");
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      const user = userCredential?.user
-
-      if (!user) {
-        throw new Error("Not permitted as admin.");
-      }
-    } catch (authError: any) {
-      setError("Authentication error: " + authError.message);
-    } finally {
-      setLoading(false);
-      setEmail("");
-      setPassword("");
+  const validateInputs = () => {
+    if (!email.trim()) {
+      return "Email is required";
     }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return "Please enter a valid email address.";
+    }
+    if (!password.trim()) {
+      return "Password is required.";
+    }
+    if (password.length < 5) {
+      return "Password must be at least 5 characters long.";
+    }
+    return "";
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const validationMessage = validateInputs();
+    if (validationMessage) {
+      setValidationError(validationMessage);
+      return;
+    }
+
+    setValidationError("");
+    originalHandleLogin(e);
   };
 
   return (
@@ -45,6 +55,7 @@ const LoginForm = () => {
         Login as Admin
       </h2>
       {error && <p className="text-red-500">{error}</p>}
+      {validationError && <p className="text-red-500">{validationError}</p>}
       <div className="mb-4">
         <label
           htmlFor="email"
@@ -57,7 +68,7 @@ const LoginForm = () => {
           type="email"
           className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
           required
         />
       </div>
@@ -73,7 +84,7 @@ const LoginForm = () => {
           type="password"
           className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           required
         />
       </div>

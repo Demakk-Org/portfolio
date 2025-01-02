@@ -10,19 +10,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const email = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setLoading(true);
 
       try {
         if (user) {
-          if (user.email === email) {
-            setIsAuthorized(true);
-          } else {
-            setIsAuthorized(false);
-          }
+          setIsAuthorized(true);
         } else {
           setIsAuthorized(false);
         }
@@ -43,11 +37,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {isAuthorized ? (
-        <div className="mx-5 flex ">
-          <div className="static bg-blue-300 rounded-lg">
+        <div className="flex">
+          <div className="fixed left-5 bg-blue-300 rounded-lg">
             <SideNav />
           </div>
-          <div className="md:overflow-y-auto">
+          <div className="ml-[150px] px-[100px] md:overflow-y-auto rounded-lg">
             {children}
           </div>
         </div>

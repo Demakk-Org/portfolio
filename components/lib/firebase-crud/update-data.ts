@@ -1,10 +1,21 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { FormDataTypes } from "../../../hooks/useFormHandler";
 
-const updateFirestoreData = async ({ category, docId, data }: any) => {
+interface UpdateFirestoreDataProps {
+  category: string;
+  docId: string;
+  data: FormDataTypes;
+}
+
+const updateFirestoreData = async ({
+  category,
+  docId,
+  data,
+}: UpdateFirestoreDataProps) => {
   try {
     const docRef = doc(db, category, docId);
-    await updateDoc(docRef, data);
+    await updateDoc(docRef, Object.fromEntries(Object.entries(data)));
     console.log(`${category} document updated successfully`);
   } catch (e) {
     console.error("Error while creating data:", e);

@@ -5,6 +5,7 @@ import Image from "next/image";
 import ToggleTheme from "../theme-toggle/toggle-theme";
 import SocialLinks from "./social-links";
 import useHeroData from "../../hooks/useHeroData";
+import Link from "next/link";
 
 const Hero = () => {
   const { data, isLoading, error } = useHeroData({ itemQuantity: 1 });
@@ -39,18 +40,12 @@ const Hero = () => {
               <p className="flex  text-left leading-relaxed tracking-normal">
                 {data.map((descriptionData) => descriptionData.description)}
               </p>
-
-              <button
-                className=" bg-orange-400 rounded text-lg px-[1rem] py-[.5rem] text-white desktop:text-2xl cursor-pointer "
-                onClick={() => {
-                  const contactElement = document.getElementById("contact");
-                  if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
+              <Link
+                href={"#contact"}
+                className=" bg-orange-400 rounded text-lg no-underline px-[1rem] py-[.5rem] text-white desktop:text-2xl cursor-pointer "
               >
                 hire me
-              </button>
+              </Link>
             </div>
           </div>
         </div>

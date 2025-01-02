@@ -1,8 +1,28 @@
-export const formFields: { [key: string]: any[] } = {
+type FormFieldConfig = {
+  required?: boolean;
+  placeholder?: string;
+  maxLength?: number;
+  pattern?: RegExp;
+  defaultValue?: string | number;
+};
+
+type FormFieldType = {
+  name: string;
+  label: string;
+  type: "text" | "textarea" | "number" | "date" | "email" | "file";
+  config?: FormFieldConfig;
+};
+
+export const formFields: { [key: string]: FormFieldType[] } = {
   services: [
-    { name: "title", label: "Title", type: "text" },
+    {
+      name: "title",
+      label: "Title",
+      type: "text",
+      config: { required: true, placeholder: "Enter title" },
+    },
     { name: "description", label: "Description", type: "textarea" },
-    { name: "imageUrl", label: "Image URL", type: "text" },
+    { name: "imageUrl", label: "Image URL", type: "file" },
   ],
   projects: [
     { name: "title", label: "Title", type: "text" },

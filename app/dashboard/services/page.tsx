@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import UpdateDashboardData, {
-  DataItem,
-} from "../../../components/dashboard/update-dashboard-data";
+import UpdateDashboardData from "../../../components/dashboard/dashboard-crud/update-dashboard-data";
 import useServiceData from "../../../hooks/useServiceData";
+import { CategoryType, DataItem } from "../../../types/type";
 
 const Page = () => {
   const { data, isLoading, error } = useServiceData({ itemQuantity: 10 });
@@ -14,7 +13,7 @@ const Page = () => {
 
   return (
     <>
-      <UpdateDashboardData data={data as DataItem[]} category="services" />
+      <UpdateDashboardData data={data as DataItem[]} category={CategoryType.services} />
     </>
   );
 };

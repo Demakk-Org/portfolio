@@ -1,23 +1,28 @@
 import { useState } from "react";
-import { dashboardCRUD } from "../components/dashboard/dashboard-crud";
-import prepareFormData from "../components/dashboard/update-form";
+import prepareFormData from "../components/dashboard/updated-form";
+import { CategoryType } from "../types/type";
+import { dashboardCRUD } from "../components/dashboard/dashboard-crud/dashboard-crud";
 
 export interface FormDataTypes {
   id?: string;
-  name: string;
-  title: string;
-  description: string;
-  feedback: string;
-  techStack: string;
-  file: File | null;
+  name?: string;
+  title?: string;
+  description?: string;
+  feedback?: string;
+  techStack?: string;
+  file?: File | null;
+  cvUrl?: string;
+  imageUrl?: string;
 }
 
 export default function useFormHandler<T extends { id: string }>(
   initialData: T[],
-  category: string
+  category: CategoryType
 ) {
   const [collectionData, setCollectionData] = useState<T[]>(initialData);
   const [editingItem, setEditingItem] = useState<FormDataTypes | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormDataTypes>({
     name: "",
@@ -41,7 +46,6 @@ export default function useFormHandler<T extends { id: string }>(
   };
 
   const startEditing = (item: FormDataTypes) => {
-    // setEditingItem(item);
     setEditingItem({
       name: item.name,
       title: item.title,
@@ -62,13 +66,12 @@ export default function useFormHandler<T extends { id: string }>(
 
   const saveItem = async () => {
     try {
-      const { updatedFormData, file } = prepareFormData(formData, category);
-      const updatedItem = await dashboardCRUD.saveItem(
+      const { updatedFormData } = prepareFormData(formData, category);
+      const updatedItem = (await dashboardCRUD.saveItem(
         updatedFormData,
         category,
-        file,
         editingItem?.id
-      );
+      )) as T;
       setCollectionData((prev) =>
         prev.map((item) => (item.id === updatedItem?.id ? updatedItem : item))
       );
@@ -99,13 +102,36 @@ export default function useFormHandler<T extends { id: string }>(
     }
   };
 
+  function handleDeleteClick(id: string) {
+    setItemToDelete(id);
+    setIsConfirmingDelete(true);
+  }
+
+  function confirmDelete() {
+    if (itemToDelete) {
+      deleteItem(itemToDelete);
+    }
+    setIsConfirmingDelete(false);
+    setItemToDelete(null);
+  }
+
+  function cancelDelete() {
+    setIsConfirmingDelete(false);
+    setItemToDelete(null);
+  }
+
   return {
+    isConfirmingDelete,
     collectionData,
     formData,
     handleInputChange,
     handleFileChange,
     saveItem,
     deleteItem,
+    confirmDelete,
+    cancelDelete,
+    handleDeleteClick,
+    setIsConfirmingDelete,
     startEditing,
     cancelEditing,
   };
