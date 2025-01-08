@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { EditDataProps } from "./update-dashboard-data";
-import Form from "../data-input-form";
+import DashboardDataInputForm from "../data-input-form";
 import Modal from "../modal";
 import ServiceItem from "../service-item";
 import Table from "../table";
 import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
 import { formFields, tableHeaders } from "../formEntries";
-import DeleteData from "./delete-data";
+import RemoveDashboardItemData from "./remove-dashboard-item-data";
 import { DataItem } from "../../../types/type";
 
 export default function EditDashboardData<T extends DataItem>({
@@ -44,7 +44,6 @@ export default function EditDashboardData<T extends DataItem>({
                 onClick={() => {
                   startEditing({
                     ...row,
-                    name: row.name || "",
                   } as FormDataTypes);
                   setIsEditing(true);
                 }}
@@ -52,7 +51,11 @@ export default function EditDashboardData<T extends DataItem>({
               >
                 Edit
               </button>
-              <DeleteData data={data} row={row} category={category} />
+              <RemoveDashboardItemData
+                data={data}
+                row={row}
+                category={category}
+              />
             </td>
           </>
         )}
@@ -62,7 +65,7 @@ export default function EditDashboardData<T extends DataItem>({
         title={`Edit ${category}`}
         onClose={() => setIsEditing(false)}
       >
-        <Form
+        <DashboardDataInputForm
           fields={formFields[category]}
           formData={formData as { [key: string]: FormDataTypes }}
           onInputChange={handleInputChange}

@@ -12,7 +12,7 @@ const Table = <T extends object>({
   renderRow,
 }: TableProps<T>) => {
   return (
-    <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+    <table className=" bg-white border border-gray-200 shadow-md rounded-lg">
       <thead className="bg-gray-100">
         <tr>
           {headers.map((header, idx) => (

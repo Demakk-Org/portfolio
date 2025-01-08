@@ -9,7 +9,7 @@ export interface FormDataTypes {
   title?: string;
   description?: string;
   feedback?: string;
-  techStack?: string;
+  skills?: string;
   file?: File | null;
   cvUrl?: string;
   imageUrl?: string;
@@ -29,7 +29,7 @@ export default function useFormHandler<T extends { id: string }>(
     title: "",
     description: "",
     feedback: "",
-    techStack: "",
+    skills: "",
     file: null,
   });
 
@@ -47,20 +47,21 @@ export default function useFormHandler<T extends { id: string }>(
 
   const startEditing = (item: FormDataTypes) => {
     setEditingItem({
+      id: item.id,
       name: item.name,
       title: item.title,
       description: item.description,
       feedback: item.feedback,
-      techStack: item.techStack,
-      file: null,
+      skills: item.skills,
+      imageUrl: item.imageUrl,
     });
     setFormData({
       name: item.name,
       title: item.title,
       description: item.description,
       feedback: item.feedback,
-      techStack: item.techStack,
-      file: null,
+      skills: item.skills,
+      imageUrl: item.imageUrl,
     });
   };
 
@@ -88,8 +89,10 @@ export default function useFormHandler<T extends { id: string }>(
       title: "",
       description: "",
       feedback: "",
-      techStack: "",
+      skills: "",
       file: null,
+      imageUrl: "",
+      cvUrl: "",
     });
   };
 
@@ -107,12 +110,16 @@ export default function useFormHandler<T extends { id: string }>(
     setIsConfirmingDelete(true);
   }
 
-  function confirmDelete() {
+  async function confirmDelete() {
     if (itemToDelete) {
-      deleteItem(itemToDelete);
+      try {
+        await deleteItem(itemToDelete);
+        setIsConfirmingDelete(false);
+        setItemToDelete(null);
+      } catch (e) {
+        console.error("Error deleting item", e);
+      }
     }
-    setIsConfirmingDelete(false);
-    setItemToDelete(null);
   }
 
   function cancelDelete() {

@@ -7,11 +7,11 @@ const ProjectSection = () => {
   const {
     filteredProjects,
     selectedSkill,
-    setSelectedSkill,
     isLoading,
     error,
     allSkills,
-  } = useProjectData({itemQuantity:3});
+    setSelectedSkill,
+  } = useProjectData({ itemQuantity: 3 });
 
   return (
     <section

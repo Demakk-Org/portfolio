@@ -12,7 +12,7 @@ const AboutMe = () => {
     <div>
       <div
         id="about-me"
-        className={`flex items-center justify-center px-[5%]  pt-[10%]  gap-5 font- dark:text-white  tablet:gap-[140px] tablet:px-[40%] desktop:px-[30%]`}
+        className={`flex items-center justify-center px-[5%]  pt-[10%]  gap-5  dark:text-white tablet:gap-[140px] tablet:px-[40%] desktop:px-[30%]`}
       >
         <div className="hidden tablet:flex">
           <div className="rounded-full overflow-hidden h-[200px] w-[200px] relative  desktop:h-[300px] desktop:w-[300px]">

@@ -8,7 +8,7 @@ import { CategoryType, DataItem } from "../../../types/type";
 const Page = () => {
   const { data, isLoading, error } = useAboutMeData({ itemQuantity: 1 });
 
-  if (isLoading) return <div className="p-[300px]">Loading...</div>;
+  if (isLoading) return <p className="p-[300px]">Loading...</p>;
   if (error) return <div>Error: {error}</div>;
 
   return (

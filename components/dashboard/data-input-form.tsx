@@ -13,6 +13,7 @@ interface FormProps {
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -25,31 +26,47 @@ const DashboardDataInputForm = ({
   const inputStyle =
     "w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50";
 
+
   return (
     <>
-      <div className="p-6 border border-gray-300 rounded-md bg-white space-y-6">
+      <div className="p-4 border border-gray-300 rounded-md bg-white space-y-3">
         {fields.map((field: FieldsType) => (
-          <label key={field.name} className="block space-y-2">
-            <span className="text-black">{field.label}</span>
-            {field.type === "textarea" ? (
-              <textarea
-                name={field.name}
-                value={formData[field.name] as string}
-                onChange={onInputChange}
-                rows={field.rows || 3}
-                className={inputStyle}
-              />
-            ) : (
-              <input
-                type={field.type}
-                name={field.name}
-                value={(formData[field.name] as string) || ""}
-                onChange={field.type === "file" ? onFileChange : onInputChange}
-                className={inputStyle}
+          <div key={field.name}>
+            <label className="block space-y-2">
+              <span className="text-black">{field.label}</span>
+              {field.type === "textarea" ? (
+                <textarea
+                  name={field.name}
+                  value={formData[field.name] as string}
+                  onChange={onInputChange}
+                  rows={field.rows}
+                  className={inputStyle}
+                />
+              ) : field.type === "file" ? (
+                <input
+                  type="file"
+                  name={field.name}
+                  onChange={onFileChange}
+                  className={inputStyle}
+                />
+              ) : (
+                <input
+                  type={field.type}
+                  name={field.name}
+                  value={formData[field.name] as string}
+                  onChange={onInputChange}
+                  className={inputStyle}
+                />
+              )}
+            </label>
+            {field.type === "file" && (
+              <img
+                src={formData.imageUrl as string}
+                alt="preview"
+                className="mt-4 max-h-14 rounded"
               />
             )}
-            <img src={formData.imageUrl as string} alt="" />
-          </label>
+          </div>
         ))}
       </div>
     </>

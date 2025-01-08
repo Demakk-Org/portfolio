@@ -5,11 +5,11 @@ export default function prepareFormData(
   formData: FormDataTypes,
   category: CategoryType
 ) {
-  const techStackArray = formData.techStack
-    ? formData.techStack
-        .split(",")
-        .map((tech: string) => tech.trim().toLowerCase())
-    : [];
+
+  const techStackArray =
+    typeof formData.skills === "string"
+      ? formData.skills.split(",").map((tech: string) => tech.trim())
+      : formData.skills;
 
   let data = {};
   switch (category) {

@@ -1,5 +1,7 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface DataItem {
-  createdAt: any;
+  createdAt: Timestamp;
   id: string;
   name?: string;
   title?: string;

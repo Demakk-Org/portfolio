@@ -6,10 +6,10 @@ import { CategoryType, DataItem } from "../../../types/type";
 interface DeleteDataProps<T extends DataItem> {
   row: T;
   category: CategoryType;
-  data: any;
+  data: T[];
 }
 
-export default function DeleteData<T extends DataItem>({
+export default function RemoveDashboardItemData<T extends DataItem>({
   data,
   category,
   row,

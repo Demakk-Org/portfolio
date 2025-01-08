@@ -49,7 +49,7 @@ const ServiceItem = <T extends DataItem>({
       )}
 
       <td className="px-6 py-4 border-b text-sm text-gray-600">
-        {new Date(row.createdAt.seconds * 1000).toLocaleDateString()}
+        {new Date(row.createdAt?.seconds * 1000).toLocaleDateString()}
       </td>
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../modal";
-import Form from "../data-input-form";
+import DashboardDataInputForm from "../data-input-form";
 import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
 import { formFields } from "../formEntries";
 import { EditDataProps } from "./update-dashboard-data";
@@ -33,7 +33,7 @@ export default function CreateDashboardData<T extends DataItem>({
         title={`Add New ${category} Item`}
         onClose={() => setIsAdding(false)}
       >
-        <Form
+        <DashboardDataInputForm
           fields={formFields[category]}
           formData={formData as { [key: string]: FormDataTypes }}
           onInputChange={handleInputChange}
