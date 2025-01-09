@@ -1,12 +1,13 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { FormDataTypes } from "../../../hooks/useFormHandler";
 
 export const createFirestoreData = async ({
   category,
   data,
 }: {
   category: string;
-  data: any;
+  data: FormDataTypes;
 }) => {
   try {
     const collectionRef = collection(db, category);

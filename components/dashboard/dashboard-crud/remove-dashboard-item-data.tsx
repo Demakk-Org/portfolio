@@ -26,7 +26,7 @@ export default function RemoveDashboardItemData<T extends DataItem>({
     <>
       <button
         onClick={() => {
-          handleDeleteClick(row.id);
+          handleDeleteClick(row);
           setIsConfirmingDelete(true);
         }}
         className="px-4 py-2 ml-2 text-white bg-red-500 rounded-md"

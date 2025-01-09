@@ -1,5 +1,5 @@
 import React from "react";
-import CreateDashboardData from "./create-data";
+import CreateDashboardData from "./create-dashboard-data";
 import EditDashboardData from "./edit-data";
 import { CategoryType, DataItem } from "../../../types/type";
 

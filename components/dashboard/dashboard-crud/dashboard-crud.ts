@@ -26,8 +26,8 @@ class DashboardCRUD {
     }
   }
 
-  async deleteItem(category: string, id: string) {
-    await deleteFirestoreData(category, id);
+  async deleteItem(category: string, id: string, fileUrl?: string) {
+    await deleteFirestoreData(category, id, fileUrl);
   }
 }
 

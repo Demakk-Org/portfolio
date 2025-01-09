@@ -21,7 +21,7 @@ export default function useFormHandler<T extends { id: string }>(
 ) {
   const [collectionData, setCollectionData] = useState<T[]>(initialData);
   const [editingItem, setEditingItem] = useState<FormDataTypes | null>(null);
-  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<FormDataTypes | null>(null);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormDataTypes>({
@@ -96,17 +96,20 @@ export default function useFormHandler<T extends { id: string }>(
     });
   };
 
-  const deleteItem = async (id: string) => {
+  async function deleteItem(itemToDelete: FormDataTypes) {
+    const id = itemToDelete.id;
     try {
-      await dashboardCRUD.deleteItem(category, id);
+      const fileUrl =
+        category === "uploadCV" ? itemToDelete?.cvUrl : itemToDelete?.imageUrl;
+      await dashboardCRUD.deleteItem(category, id ?? "", fileUrl);
       setCollectionData((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting item:", error);
     }
-  };
+  }
 
-  function handleDeleteClick(id: string) {
-    setItemToDelete(id);
+  function handleDeleteClick(item: T) {
+    setItemToDelete(item);
     setIsConfirmingDelete(true);
   }
 

@@ -16,7 +16,7 @@ const updateFirestoreData = async ({
   try {
     const docRef = doc(db, category, docId);
     await updateDoc(docRef, Object.fromEntries(Object.entries(data)));
-    console.log(`${category} document updated successfully`);
+    alert(`${category} document ${docId} updated successfully`);
   } catch (e) {
     console.error("Error while creating data:", e);
   }

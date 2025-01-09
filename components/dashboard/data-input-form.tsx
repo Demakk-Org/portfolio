@@ -26,7 +26,6 @@ const DashboardDataInputForm = ({
   const inputStyle =
     "w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50";
 
-
   return (
     <>
       <div className="p-4 border border-gray-300 rounded-md bg-white space-y-3">
@@ -61,7 +60,7 @@ const DashboardDataInputForm = ({
             </label>
             {field.type === "file" && (
               <img
-                src={formData.imageUrl as string}
+                src={formData?.imageUrl as string}
                 alt="preview"
                 className="mt-4 max-h-14 rounded"
               />
