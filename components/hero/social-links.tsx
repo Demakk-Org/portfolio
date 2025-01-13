@@ -3,9 +3,17 @@ import React from "react";
 import { FaDiscord, FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const socialLinks = [
-  { id: 1, href: "", icon: FaLinkedinIn },
+  {
+    id: 1,
+    href: "https://www.linkedin.com/in/ephrem-mekuria-20215319a",
+    icon: FaLinkedinIn,
+  },
   { id: 2, href: "https://github.com/ermias5", icon: FaGithub },
-  { id: 3, href: "", icon: FaFacebook },
+  {
+    id: 3,
+    href: "https://web.facebook.com/ephrem.mekuria.58",
+    icon: FaFacebook,
+  },
   { id: 4, href: "", icon: FaDiscord },
 ];
 

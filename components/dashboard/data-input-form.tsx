@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FormDataTypes } from "../../hooks/useFormHandler";
 
 interface FieldsType {
@@ -58,10 +59,12 @@ const DashboardDataInputForm = ({
                 />
               )}
             </label>
-            {field.type === "file" && (
-              <img
+            {field.type === "file" && formData.imageUrl && (
+              <Image
                 src={formData?.imageUrl as string}
                 alt="preview"
+                height={100}
+                width={100}
                 className="mt-4 max-h-14 rounded"
               />
             )}

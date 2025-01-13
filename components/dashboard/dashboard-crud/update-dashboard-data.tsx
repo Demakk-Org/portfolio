@@ -1,6 +1,6 @@
 import React from "react";
 import CreateDashboardData from "./create-dashboard-data";
-import EditDashboardData from "./edit-data";
+import EditDashboardData from "./edit-dashboard-items";
 import { CategoryType, DataItem } from "../../../types/type";
 
 export interface EditDataProps<T> {

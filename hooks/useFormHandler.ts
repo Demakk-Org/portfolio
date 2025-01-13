@@ -73,9 +73,13 @@ export default function useFormHandler<T extends { id: string }>(
         category,
         editingItem?.id
       )) as T;
-      setCollectionData((prev) =>
-        prev.map((item) => (item.id === updatedItem?.id ? updatedItem : item))
-      );
+      if (editingItem?.id) {
+        setCollectionData((prev) =>
+          prev.map((item) => (item.id === updatedItem?.id ? updatedItem : item))
+        );
+      } else {
+        setCollectionData((prev) => [...prev, updatedItem]);
+      }
       cancelEditing();
     } catch (error) {
       console.error("Error saving item:", error);
@@ -113,15 +117,24 @@ export default function useFormHandler<T extends { id: string }>(
     setIsConfirmingDelete(true);
   }
 
+  // async function confirmDelete() {
+  //   if (itemToDelete) {
+  //     try {
+  //       await deleteItem(itemToDelete);
+  //       setIsConfirmingDelete(false);
+  //       setItemToDelete(null);
+  //     } catch (e) {
+  //       console.error("Error deleting item", e);
+  //     }
+  //   }
+  // }
+
   async function confirmDelete() {
     if (itemToDelete) {
-      try {
-        await deleteItem(itemToDelete);
+      deleteItem(itemToDelete).then(() => {
         setIsConfirmingDelete(false);
         setItemToDelete(null);
-      } catch (e) {
-        console.error("Error deleting item", e);
-      }
+      });
     }
   }
 

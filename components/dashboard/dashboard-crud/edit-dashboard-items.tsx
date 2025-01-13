@@ -6,7 +6,7 @@ import ServiceItem from "../service-item";
 import Table from "../table";
 import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
 import { formFields, tableHeaders } from "../formEntries";
-import RemoveDashboardItemData from "./remove-dashboard-item-data";
+import RemoveDashboardItemData from "./remove-dashboard-item";
 import { DataItem } from "../../../types/type";
 
 export default function EditDashboardData<T extends DataItem>({
