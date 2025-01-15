@@ -7,7 +7,7 @@ import LoginForm from "../../components/dashboard/authForm";
 import NavLinks from "../../components/dashboard/nav-links";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {

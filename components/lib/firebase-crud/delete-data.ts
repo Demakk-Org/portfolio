@@ -19,7 +19,7 @@ const deleteFirestoreData = async (
 
     // Delete file from storage if filepath is provided
     if (filepath) {
-      const fileRef = ref(storage, filepath);;
+      const fileRef = ref(storage, filepath);
       await deleteObject(fileRef);
     }
   } catch (error) {

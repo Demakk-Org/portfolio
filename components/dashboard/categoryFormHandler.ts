@@ -5,7 +5,6 @@ export default function prepareFormData(
   formData: FormDataTypes,
   category: CategoryType
 ) {
-
   const techStackArray =
     typeof formData.skills === "string"
       ? formData.skills.split(",").map((tech: string) => tech.trim())

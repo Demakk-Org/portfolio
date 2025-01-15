@@ -2,18 +2,23 @@ import { useState } from "react";
 import { EditDataProps } from "./update-dashboard-data";
 import DashboardDataInputForm from "../data-input-form";
 import Modal from "../modal";
-import ServiceItem from "../service-item";
+import RenderRowData from "../row-data-displayer";
 import Table from "../table";
 import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
 import { formFields, tableHeaders } from "../formEntries";
-import RemoveDashboardItemData from "./remove-dashboard-item";
+import RemoveDashboardItem from "./dashboard-item-deletion";
 import { DataItem } from "../../../types/type";
+import {
+  baseButtonStyle,
+  primaryButtonStyle,
+  secondaryButtonStyle,
+} from "../../../styles/style";
 
 export default function EditDashboardData<T extends DataItem>({
   data,
   category,
 }: EditDataProps<T>) {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 
   const {
     collectionData,
@@ -22,7 +27,6 @@ export default function EditDashboardData<T extends DataItem>({
     handleFileChange,
     saveItem,
     startEditing,
-    cancelEditing,
   } = useFormHandler(data, category);
 
   const headers = tableHeaders[category] || [
@@ -38,32 +42,28 @@ export default function EditDashboardData<T extends DataItem>({
         rows={collectionData}
         renderRow={(row) => (
           <>
-            <ServiceItem<T> row={row} category={category} />
+            <RenderRowData<T> row={row} category={category} />
             <td className="flex mt-5 px-6 py-4">
               <button
                 onClick={() => {
                   startEditing({
                     ...row,
                   } as FormDataTypes);
-                  setIsEditing(true);
+                  setIsFormModalOpen(true);
                 }}
                 className="px-4 py-2 text-white bg-blue-500 rounded-md"
               >
                 Edit
               </button>
-              <RemoveDashboardItemData
-                data={data}
-                row={row}
-                category={category}
-              />
+              <RemoveDashboardItem data={data} row={row} category={category} />
             </td>
           </>
         )}
       />
       <Modal
-        isOpen={isEditing}
+        isOpen={isFormModalOpen}
         title={`Edit ${category}`}
-        onClose={() => setIsEditing(false)}
+        onClose={() => setIsFormModalOpen(false)}
       >
         <DashboardDataInputForm
           fields={formFields[category]}
@@ -74,14 +74,19 @@ export default function EditDashboardData<T extends DataItem>({
         <div className="flex justify-end gap-2">
           <button
             onClick={() => {
-              setIsEditing(false);
-              cancelEditing();
+              setIsFormModalOpen(false);
             }}
+            className={`${baseButtonStyle} ${secondaryButtonStyle}`}
           >
             Cancel
           </button>
 
-          <button onClick={saveItem}>Save</button>
+          <button
+            onClick={saveItem}
+            className={`${baseButtonStyle} ${primaryButtonStyle}`}
+          >
+            Save
+          </button>
         </div>
       </Modal>
     </>

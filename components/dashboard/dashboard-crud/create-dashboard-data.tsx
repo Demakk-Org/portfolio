@@ -15,7 +15,7 @@ export default function CreateDashboardData<T extends DataItem>({
   data,
   category,
 }: EditDataProps<T>) {
-  const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 
   const { formData, handleInputChange, handleFileChange, saveItem } =
     useFormHandler(data, category);
@@ -23,15 +23,15 @@ export default function CreateDashboardData<T extends DataItem>({
   return (
     <div>
       <button
-        onClick={() => setIsAdding(true)}
+        onClick={() => setIsFormModalOpen(true)}
         className="px-4 py-2 bg-blue-500 text-white rounded-md"
       >
         Add New {category}
       </button>
       <Modal
-        isOpen={isAdding}
+        isOpen={isFormModalOpen}
         title={`Add New ${category} Item`}
-        onClose={() => setIsAdding(false)}
+        onClose={() => setIsFormModalOpen(false)}
       >
         <DashboardDataInputForm
           fields={formFields[category]}
@@ -42,7 +42,7 @@ export default function CreateDashboardData<T extends DataItem>({
         <div className="flex justify-end gap-2">
           <button
             onClick={() => {
-              setIsAdding(false);
+              setIsFormModalOpen(false);
             }}
             className={`${baseButtonStyle} ${secondaryButtonStyle}`}
           >

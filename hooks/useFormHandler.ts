@@ -1,5 +1,5 @@
 import { useState } from "react";
-import prepareFormData from "../components/dashboard/updated-form";
+import prepareFormData from "../components/dashboard/categoryFormHandler";
 import { CategoryType } from "../types/type";
 import { dashboardCRUD } from "../components/dashboard/dashboard-crud/dashboard-crud";
 
@@ -21,7 +21,7 @@ export default function useFormHandler<T extends { id: string }>(
 ) {
   const [collectionData, setCollectionData] = useState<T[]>(initialData);
   const [editingItem, setEditingItem] = useState<FormDataTypes | null>(null);
-  const [itemToDelete, setItemToDelete] = useState<FormDataTypes | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<T | null>(null);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormDataTypes>({
@@ -56,6 +56,7 @@ export default function useFormHandler<T extends { id: string }>(
       imageUrl: item.imageUrl,
     });
     setFormData({
+      id: item.id,
       name: item.name,
       title: item.title,
       description: item.description,
@@ -80,13 +81,13 @@ export default function useFormHandler<T extends { id: string }>(
       } else {
         setCollectionData((prev) => [...prev, updatedItem]);
       }
-      cancelEditing();
+      clearFormEntries();
     } catch (error) {
       console.error("Error saving item:", error);
     }
   };
 
-  const cancelEditing = () => {
+  const clearFormEntries = () => {
     setEditingItem(null);
     setFormData({
       name: "",
@@ -105,36 +106,27 @@ export default function useFormHandler<T extends { id: string }>(
     try {
       const fileUrl =
         category === "uploadCV" ? itemToDelete?.cvUrl : itemToDelete?.imageUrl;
-      await dashboardCRUD.deleteItem(category, id ?? "", fileUrl);
+      await dashboardCRUD.deleteItem(category, id!, fileUrl);
       setCollectionData((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting item:", error);
     }
   }
 
-  function handleDeleteClick(item: T) {
+  function onDeleteItemInitiate(item: T) {
     setItemToDelete(item);
     setIsConfirmingDelete(true);
   }
 
-  // async function confirmDelete() {
-  //   if (itemToDelete) {
-  //     try {
-  //       await deleteItem(itemToDelete);
-  //       setIsConfirmingDelete(false);
-  //       setItemToDelete(null);
-  //     } catch (e) {
-  //       console.error("Error deleting item", e);
-  //     }
-  //   }
-  // }
-
   async function confirmDelete() {
     if (itemToDelete) {
-      deleteItem(itemToDelete).then(() => {
+      try {
+        await deleteItem(itemToDelete);
         setIsConfirmingDelete(false);
         setItemToDelete(null);
-      });
+      } catch (e) {
+        console.error("Error deleting item", e);
+      }
     }
   }
 
@@ -153,9 +145,9 @@ export default function useFormHandler<T extends { id: string }>(
     deleteItem,
     confirmDelete,
     cancelDelete,
-    handleDeleteClick,
+    onDeleteItemInitiate,
     setIsConfirmingDelete,
     startEditing,
-    cancelEditing,
+    clearFormEntries,
   };
 }

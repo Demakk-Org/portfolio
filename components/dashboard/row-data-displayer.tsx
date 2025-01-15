@@ -6,7 +6,7 @@ interface ServiceItemProps<T extends DataItem> {
   category: string;
 }
 
-const ServiceItem = <T extends DataItem>({
+const RenderRowData = <T extends DataItem>({
   row,
   category,
 }: ServiceItemProps<T>) => {
@@ -55,4 +55,4 @@ const ServiceItem = <T extends DataItem>({
   );
 };
 
-export default ServiceItem;
+export default RenderRowData;

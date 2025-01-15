@@ -9,7 +9,7 @@ interface DeleteDataProps<T extends DataItem> {
   data: T[];
 }
 
-export default function RemoveDashboardItemData<T extends DataItem>({
+export default function RemoveDashboardItem<T extends DataItem>({
   data,
   category,
   row,
@@ -18,7 +18,7 @@ export default function RemoveDashboardItemData<T extends DataItem>({
     isConfirmingDelete,
     confirmDelete,
     cancelDelete,
-    handleDeleteClick,
+    onDeleteItemInitiate,
     setIsConfirmingDelete,
   } = useFormHandler(data, category);
 
@@ -26,7 +26,7 @@ export default function RemoveDashboardItemData<T extends DataItem>({
     <>
       <button
         onClick={() => {
-          handleDeleteClick(row);
+          onDeleteItemInitiate(row);
           setIsConfirmingDelete(true);
         }}
         className="px-4 py-2 ml-2 text-white bg-red-500 rounded-md"
