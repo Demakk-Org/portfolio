@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchFirestoreData } from "../components/lib/firebase-crud/fetch-data";
+import { fetchFirestoreCollection } from "../components/lib/firebase-crud/collection-fetcher";
 
 export interface ProjectType {
   id?: string;
@@ -23,7 +23,7 @@ export default function useProjectData({
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<ProjectType>("projects", itemQuantity)
+    fetchFirestoreCollection<ProjectType>("projects", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);

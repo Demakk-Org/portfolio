@@ -4,7 +4,7 @@ import Image from "next/image";
 import logo from "../../public/subtract.png";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import NavLinks from "./nav-links";
-import SocialLinks from "../hero/social-links";
+// import SocialLinks from "../hero/social-links";
 
 const SideNav = () => {
   const [nav, setNav] = useState(false);
@@ -56,7 +56,7 @@ const SideNav = () => {
             <p className="text-lg font-bold"> Lets connect</p>
             <div className="flex items-center justify-center text-[10px]">
               <div className="rounded-full cursor-pointer">
-                <SocialLinks />
+                {/* <SocialLinks /> */}
               </div>
             </div>
           </div>

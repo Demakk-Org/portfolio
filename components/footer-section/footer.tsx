@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../public/subtract.png";
 import NavLinks from "../navigation/nav-links";
-import SocialLinks from "../hero/social-links";
+// import SocialLinks from "../hero/social-links";
 
 const desktopClassName =
   "[text-decoration:none] tracking-[0.03em] font-poppins dark:text-white cursor-pointer hover:text-blue-600 text-nowrap tablet:px-[6px] laptop:px-[12px]";
@@ -32,7 +32,7 @@ const FooterSection = () => {
         </div>
       </div>
       <div className="flex justify-center items-center gap-1">
-        <SocialLinks />
+        {/* <SocialLinks /> */}
       </div>
 
       <div className="w-full flex justify-center gap-2 py-2 bg-dimgray text-md text-white font-poppins">

@@ -4,7 +4,9 @@ import DashboardDataInputForm from "../data-input-form";
 import Modal from "../modal";
 import RenderRowData from "../row-data-displayer";
 import Table from "../table";
-import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
+import useFormHandler, {
+  FormDataTypes,
+} from "../../../hooks/useDashboardFormHandler";
 import { formFields, tableHeaders } from "../formEntries";
 import RemoveDashboardItem from "./dashboard-item-deletion";
 import { DataItem } from "../../../types/type";

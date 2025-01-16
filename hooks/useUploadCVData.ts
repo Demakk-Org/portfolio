@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchFirestoreData } from "../components/lib/firebase-crud/fetch-data";
+import { fetchFirestoreCollection } from "../components/lib/firebase-crud/collection-fetcher";
 
 interface UploadCVType {
   id: string;
@@ -15,7 +15,7 @@ const useUploadCVData = ({ itemQuantity }: { itemQuantity: number }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<UploadCVType>("uploadCV", itemQuantity)
+    fetchFirestoreCollection<UploadCVType>("uploadCV", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);

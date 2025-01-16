@@ -3,9 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import ToggleTheme from "../theme-toggle/toggle-theme";
-import SocialLinks from "./social-links";
 import useHeroData from "../../hooks/useHeroData";
 import Link from "next/link";
+import SocialMediaPlatformLinks from "./social-media-platform-links";
 
 const Hero = () => {
   const { data, isLoading, error } = useHeroData({ itemQuantity: 1 });
@@ -70,7 +70,7 @@ const Hero = () => {
           <div className="hidden tablet:flex">
             <div className="flex items-center justify-center gap-5 my-8 w-full">
               <div className="rounded-full cursor-pointer">
-                <SocialLinks />
+                <SocialMediaPlatformLinks />
               </div>
             </div>
           </div>

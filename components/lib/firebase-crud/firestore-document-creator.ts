@@ -1,8 +1,8 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import { FormDataTypes } from "../../../hooks/useFormHandler";
+import { FormDataTypes } from "../../../hooks/useDashboardFormHandler";
 
-export const createFirestoreData = async ({
+export const createCategoryDocument = async ({
   category,
   data,
 }: {
@@ -25,4 +25,4 @@ export const createFirestoreData = async ({
   }
 };
 
-export default createFirestoreData;
+export default createCategoryDocument;

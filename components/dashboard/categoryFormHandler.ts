@@ -1,4 +1,4 @@
-import { FormDataTypes } from "../../hooks/useFormHandler";
+import { FormDataTypes } from "../../hooks/useDashboardFormHandler";
 import { CategoryType } from "../../types/type";
 
 export default function prepareFormData(
@@ -39,6 +39,11 @@ export default function prepareFormData(
       data = {
         title: formData.title,
         name: formData.name,
+      };
+    case "socialMediaPlatforms":
+      data = {
+        name: formData.name,
+        linkUrl: formData.linkUrl,
       };
       break;
   }

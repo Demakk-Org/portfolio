@@ -12,6 +12,7 @@ export interface DataItem {
   imageUrl?: string;
   skills?: string[];
   cvUrl?: string;
+  linkUrl?: string;
 }
 
 export enum CategoryType {
@@ -22,4 +23,5 @@ export enum CategoryType {
   testimonials = "testimonials",
   contact = "contact",
   uploadCV = "uploadCV",
+  socialMediaPlatforms = "socialMediaPlatforms",
 }

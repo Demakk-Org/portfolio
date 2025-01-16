@@ -13,6 +13,7 @@ export interface FormDataTypes {
   file?: File | null;
   cvUrl?: string;
   imageUrl?: string;
+  linkUrl?: string;
 }
 
 export default function useFormHandler<T extends { id: string }>(
@@ -31,6 +32,7 @@ export default function useFormHandler<T extends { id: string }>(
     feedback: "",
     skills: "",
     file: null,
+    linkUrl: "",
   });
 
   const handleInputChange = (
@@ -98,6 +100,7 @@ export default function useFormHandler<T extends { id: string }>(
       file: null,
       imageUrl: "",
       cvUrl: "",
+      linkUrl: "",
     });
   };
 
@@ -113,12 +116,12 @@ export default function useFormHandler<T extends { id: string }>(
     }
   }
 
-  function onDeleteItemInitiate(item: T) {
+  function onDeleteItemInitiator(item: T) {
     setItemToDelete(item);
     setIsConfirmingDelete(true);
   }
 
-  async function confirmDelete() {
+  async function onDeleteConfirmation() {
     if (itemToDelete) {
       try {
         await deleteItem(itemToDelete);
@@ -143,9 +146,9 @@ export default function useFormHandler<T extends { id: string }>(
     handleFileChange,
     saveItem,
     deleteItem,
-    confirmDelete,
+    onDeleteConfirmation,
     cancelDelete,
-    onDeleteItemInitiate,
+    onDeleteItemInitiator,
     setIsConfirmingDelete,
     startEditing,
     clearFormEntries,

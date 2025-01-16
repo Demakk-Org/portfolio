@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../modal";
-import useFormHandler from "../../../hooks/useFormHandler";
+import useFormHandler from "../../../hooks/useDashboardFormHandler";
 import { CategoryType, DataItem } from "../../../types/type";
 
 interface DeleteDataProps<T extends DataItem> {
@@ -16,9 +16,9 @@ export default function RemoveDashboardItem<T extends DataItem>({
 }: DeleteDataProps<T>) {
   const {
     isConfirmingDelete,
-    confirmDelete,
+    onDeleteConfirmation,
     cancelDelete,
-    onDeleteItemInitiate,
+    onDeleteItemInitiator,
     setIsConfirmingDelete,
   } = useFormHandler(data, category);
 
@@ -26,7 +26,7 @@ export default function RemoveDashboardItem<T extends DataItem>({
     <>
       <button
         onClick={() => {
-          onDeleteItemInitiate(row);
+          onDeleteItemInitiator(row);
           setIsConfirmingDelete(true);
         }}
         className="px-4 py-2 ml-2 text-white bg-red-500 rounded-md"
@@ -49,7 +49,7 @@ export default function RemoveDashboardItem<T extends DataItem>({
             Cancel
           </button>
           <button
-            onClick={confirmDelete}
+            onClick={onDeleteConfirmation}
             className="px-4 py-2 text-white bg-red-500 rounded-md"
           >
             Confirm

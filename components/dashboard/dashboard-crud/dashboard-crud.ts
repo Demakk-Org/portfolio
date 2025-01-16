@@ -1,7 +1,7 @@
-import { FormDataTypes } from "../../../hooks/useFormHandler";
+import { FormDataTypes } from "../../../hooks/useDashboardFormHandler";
 import { CategoryType } from "../../../types/type";
-import createFirestoreData from "../../lib/firebase-crud/create-data";
-import deleteFirestoreData from "../../lib/firebase-crud/delete-data";
+import createFirestoreData from "../../lib/firebase-crud/firestore-document-creator";
+import deleteFirestoreData from "../../lib/firebase-crud/delete-resource-handler";
 import uploadFile from "../../lib/firebase-crud/storage";
 import updateFirestoreData from "../../lib/firebase-crud/update-data";
 

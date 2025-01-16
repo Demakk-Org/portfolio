@@ -14,6 +14,7 @@ const links = [
     href: "/dashboard/about-me",
   },
   { name: "upload cv", href: "/dashboard/upload-cv" },
+  { name: "social link", href: "/dashboard/social-media-platforms" },
 ];
 
 export default function NavLinks() {

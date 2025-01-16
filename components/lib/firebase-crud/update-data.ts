@@ -1,6 +1,6 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { FormDataTypes } from "../../../hooks/useFormHandler";
+import { FormDataTypes } from "../../../hooks/useDashboardFormHandler";
 
 interface UpdateFirestoreDataProps {
   category: string;

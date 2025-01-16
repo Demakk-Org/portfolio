@@ -12,7 +12,8 @@ const RenderRowData = <T extends DataItem>({
 }: ServiceItemProps<T>) => {
   return (
     <>
-      {category === "testimonials" && (
+      {/* {category === "testimonials" && ( */}
+      {["socialMediaPlatforms", "testimonials"].includes(category) && (
         <td className=" px-6 py-4 text-sm text-gray-600">{row.name}</td>
       )}
       {["services", "projects", "testimonials"].includes(category) && (
@@ -33,6 +34,10 @@ const RenderRowData = <T extends DataItem>({
 
       {category === "testimonials" && (
         <td className=" px-6 py-4 text-sm text-gray-600">{row.feedback}</td>
+      )}
+
+      {category === "socialMediaPlatforms" && (
+        <td className=" px-6 py-4 text-sm text-gray-600">{row.linkUrl}</td>
       )}
 
       {category != "uploadCV" && (

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Modal from "../modal";
 import DashboardDataInputForm from "../data-input-form";
-import useFormHandler, { FormDataTypes } from "../../../hooks/useFormHandler";
+import useFormHandler, {
+  FormDataTypes,
+} from "../../../hooks/useDashboardFormHandler";
 import { formFields } from "../formEntries";
 import { EditDataProps } from "./update-dashboard-data";
 import { DataItem } from "../../../types/type";

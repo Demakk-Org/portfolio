@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormDataTypes } from "../../hooks/useFormHandler";
+import { FormDataTypes } from "../../hooks/useDashboardFormHandler";
 
 interface FieldsType {
   name: string;
