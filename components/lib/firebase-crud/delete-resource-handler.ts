@@ -2,7 +2,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { db, storage } from "../firebase"; // Reuse existing instances
 
-const deleteResourceFromFirestoreAndStorage = async (
+const deleteFirestoreDocument = async (
   category: string,
   docId: string,
   filepath?: string
@@ -28,4 +28,4 @@ const deleteResourceFromFirestoreAndStorage = async (
   }
 };
 
-export default deleteResourceFromFirestoreAndStorage;
+export default deleteFirestoreDocument;

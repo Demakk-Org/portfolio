@@ -1,7 +1,7 @@
 import { FormDataTypes } from "../../../hooks/useDashboardFormHandler";
 import { CategoryType } from "../../../types/type";
 import createFirestoreData from "../../lib/firebase-crud/firestore-document-creator";
-import deleteFirestoreData from "../../lib/firebase-crud/delete-resource-handler";
+import deleteFirestoreDocument from "../../lib/firebase-crud/delete-resource-handler";
 import uploadFile from "../../lib/firebase-crud/storage";
 import updateFirestoreData from "../../lib/firebase-crud/firestore-document-updator";
 
@@ -28,7 +28,7 @@ class DashboardCRUD {
   }
 
   async deleteItem(category: string, id: string, fileUrl?: string) {
-    await deleteFirestoreData(category, id, fileUrl);
+    await deleteFirestoreDocument(category, id, fileUrl);
   }
 }
 

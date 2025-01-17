@@ -6,7 +6,7 @@ const ContactSection: React.FC = () => {
   const {
     formData,
     formError,
-    formSuccess,
+    isFormSuccess,
     isSubmitting,
     handleInputChange,
     handleFormSubmit,
@@ -62,7 +62,7 @@ const ContactSection: React.FC = () => {
             />
           </div>
           {formError && <p className="text-red-500 text-center">{formError}</p>}
-          {formSuccess && (
+          {isFormSuccess && (
             <p className="text-green-500 text-center">
               Email sent successfully! Thank you for having me
             </p>

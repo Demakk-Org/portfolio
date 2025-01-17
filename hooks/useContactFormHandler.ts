@@ -16,7 +16,7 @@ export default function useContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [formSuccess, setFormSuccess] = useState(false);
+  const [isFormSuccess, setIsFormSuccess] = useState(false);
 
   const serviceId = process.env.NEXT_PUBLIC_YOUR_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_YOUR_TEMPLATE_ID;
@@ -37,7 +37,7 @@ export default function useContactForm() {
 
     const { fullName, emailAddress, userMessage } = formData;
     setFormError(null);
-    setFormSuccess(false);
+    setIsFormSuccess(false);
 
     if (!emailAddress) {
       setFormError("Please provide a valid email address.");
@@ -63,7 +63,7 @@ export default function useContactForm() {
     try {
       await emailjs.send(serviceId, templateId, emailParams, publicKey);
       setFormData({ fullName: "", emailAddress: "", userMessage: "" });
-      setFormSuccess(true);
+      setIsFormSuccess(true);
     } catch (error) {
       console.error("Email send error:", error);
       setFormError("Failed to send the email. Please try again.");
@@ -75,7 +75,7 @@ export default function useContactForm() {
   return {
     formData,
     formError,
-    formSuccess,
+    isFormSuccess,
     isSubmitting,
     handleInputChange,
     handleFormSubmit,
