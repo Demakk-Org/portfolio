@@ -68,7 +68,7 @@ const Hero = () => {
             )}
           </div>
           <div className="hidden tablet:flex">
-            <div className="flex items-center justify-center gap-5 my-8 w-full">
+            <div className="flex flex-wrap items-center justify-center gap-5 my-8 w-full">
               <div className="rounded-full cursor-pointer">
                 <SocialMediaPlatformLinks />
               </div>

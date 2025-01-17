@@ -45,7 +45,7 @@ export default function EditDashboardData<T extends DataItem>({
         renderRow={(row) => (
           <>
             <RenderRowData<T> row={row} category={category} />
-            <td className="flex mt-5 px-6 py-4">
+            <td className="flex mt-3 px-6 py-4">
               <button
                 onClick={() => {
                   startEditing({
@@ -53,7 +53,7 @@ export default function EditDashboardData<T extends DataItem>({
                   } as FormDataTypes);
                   setIsFormModalOpen(true);
                 }}
-                className="px-4 py-2 text-white bg-blue-500 rounded-md"
+                className="px-4 py-1 text-white bg-blue-500 rounded-md"
               >
                 Edit
               </button>

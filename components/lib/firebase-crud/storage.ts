@@ -1,9 +1,17 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase";
 
-async function uploadFile(folder: string, file: File, category: string) {
+interface FileStorageProps {
+  folder: string;
+  file: File;
+  category: string;
+}
+
+async function uploadFile({ folder, file, category }: FileStorageProps) {
+  const storage = getStorage();
+  const filePath = `${folder}/${category}/${file.name}`;
+  const fileRef = ref(storage, filePath);
   try {
-    const fileRef = ref(storage, `${folder}/${category}/${file.name}`);
     const snapshot = await uploadBytes(fileRef, file);
     const downloadUrl = await getDownloadURL(snapshot.ref);
     return downloadUrl;

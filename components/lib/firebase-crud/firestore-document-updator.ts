@@ -8,7 +8,7 @@ interface UpdateFirestoreDataProps {
   data: FormDataTypes;
 }
 
-const updateFirestoreData = async ({
+const updateFirestoreDocument = async ({
   category,
   docId,
   data,
@@ -16,10 +16,10 @@ const updateFirestoreData = async ({
   try {
     const docRef = doc(db, category, docId);
     await updateDoc(docRef, Object.fromEntries(Object.entries(data)));
-    alert(`${category} document ${docId} updated successfully`);
+    alert(`${category} document updated successfully`);
   } catch (e) {
     console.error("Error while creating data:", e);
   }
 };
 
-export default updateFirestoreData;
+export default updateFirestoreDocument;

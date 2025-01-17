@@ -3,14 +3,15 @@ import { CategoryType } from "../../../types/type";
 import createFirestoreData from "../../lib/firebase-crud/firestore-document-creator";
 import deleteFirestoreData from "../../lib/firebase-crud/delete-resource-handler";
 import uploadFile from "../../lib/firebase-crud/storage";
-import updateFirestoreData from "../../lib/firebase-crud/update-data";
+import updateFirestoreData from "../../lib/firebase-crud/firestore-document-updator";
 
 class DashboardCRUD {
   async saveItem(formData: FormDataTypes, category: CategoryType, id?: string) {
     // Handle file upload
     if (formData.file) {
       const folder = category === "uploadCV" ? "cv" : "images";
-      const fileUrl = await uploadFile(folder, formData.file, category);
+      const file = formData.file;
+      const fileUrl = await uploadFile({ folder, file, category });
       formData[category === "uploadCV" ? "cvUrl" : "imageUrl"] = fileUrl;
       delete formData.file;
     }

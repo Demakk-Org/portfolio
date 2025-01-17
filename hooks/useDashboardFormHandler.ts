@@ -56,6 +56,7 @@ export default function useFormHandler<T extends { id: string }>(
       feedback: item.feedback,
       skills: item.skills,
       imageUrl: item.imageUrl,
+      linkUrl: item.linkUrl,
     });
     setFormData({
       id: item.id,
@@ -65,6 +66,7 @@ export default function useFormHandler<T extends { id: string }>(
       feedback: item.feedback,
       skills: item.skills,
       imageUrl: item.imageUrl,
+      linkUrl: item.linkUrl,
     });
   };
 

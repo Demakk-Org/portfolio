@@ -12,7 +12,6 @@ const RenderRowData = <T extends DataItem>({
 }: ServiceItemProps<T>) => {
   return (
     <>
-      {/* {category === "testimonials" && ( */}
       {["socialMediaPlatforms", "testimonials"].includes(category) && (
         <td className=" px-6 py-4 text-sm text-gray-600">{row.name}</td>
       )}
@@ -45,7 +44,7 @@ const RenderRowData = <T extends DataItem>({
           <img
             src={row.imageUrl}
             alt={row.title}
-            className="w-16 h-16 object-cover rounded-lg text-sm"
+            className="w-10 h-10 object-cover rounded-lg text-sm"
           />
         </td>
       )}
