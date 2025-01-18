@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { fetchFirestoreData } from "../components/lib/firebase-crud/fetch-data";
+import { fetchFirestoreCollection } from "../components/lib/firebase-crud/collection-fetcher";
 
 interface AboutMe {
+  id: string;
   skills: string[];
   imageUrl: string;
 }
 
-const useAboutMeData = () => {
+const useAboutMeData = ({ itemQuantity }: { itemQuantity: number }) => {
   const [data, setData] = useState<AboutMe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<AboutMe>("aboutMe", 1)
+    fetchFirestoreCollection<AboutMe>("aboutMe", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);

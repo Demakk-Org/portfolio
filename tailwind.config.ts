@@ -63,6 +63,8 @@ const config: Config = {
       tablet: "640px",
       laptop: "1024px",
       desktop: "1280px",
+      xl: "1440px",
+      "2xl": "1920px",
     },
   },
   corePlugins: {

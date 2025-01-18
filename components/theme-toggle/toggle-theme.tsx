@@ -61,12 +61,12 @@ const ToggleTheme = () => {
   return (
     <button
       onClick={toggleClick}
-      className="rounded-full shadow-lg shadow-gray-50 p-1 cursor-pointer"
+      className="rounded-full shadow-md shadow-gray-5 p-1 cursor-pointer"
     >
       {theme === Theme.light ? (
-        <FaMoon className="size-6 desktop:size-10" />
+        <FaMoon className="size-6 " />
       ) : (
-        <FaSun className="size-6 desktop:size-10" color="gray" />
+        <FaSun className="size-6 " color="gray" />
       )}
     </button>
   );

@@ -10,7 +10,7 @@ import FooterSection from "../components/footer-section/footer";
 export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex flex-col flex-grow gap-[5rem] desktop:pt-[30px]">
+      <main className="flex flex-col flex-grow desktop:pt-[30px] ">
         <Navbar />
         <Hero />
         <AboutMe />

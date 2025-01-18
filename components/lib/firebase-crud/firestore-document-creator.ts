@@ -1,12 +1,13 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { FormDataTypes } from "../../../hooks/useDashboardFormHandler";
 
-export const createFirestoreData = async ({
+export const createCategoryDocument = async ({
   category,
   data,
 }: {
   category: string;
-  data: any;
+  data: FormDataTypes;
 }) => {
   try {
     const collectionRef = collection(db, category);
@@ -17,12 +18,11 @@ export const createFirestoreData = async ({
     });
 
     if (docRef) {
-      alert("document created successfully");
+      alert(`Document created to ${category} category`);
     }
-    console.log(`Document added to ${category} with ID: `, docRef.id);
   } catch (e) {
     console.error("Error while creating data:", e);
   }
 };
 
-export default createFirestoreData;
+export default createCategoryDocument;

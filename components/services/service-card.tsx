@@ -1,21 +1,27 @@
-
 import { ServiceType } from "../../hooks/useServiceData";
 import Image from "next/image";
 
-const ServiceCard: React.FC<ServiceType> = ({ title, description, imageUrl }) => {
-
+const ServiceCard: React.FC<ServiceType> = ({
+  title,
+  description,
+  imageUrl,
+}) => {
   return (
-    <div className="w-[250px] flex flex-col justify-start px-3 py-7 bg-whitesmoke-200 dark:bg-white text-black rounded-lg">
-      <Image
-        src={imageUrl}
-        alt={`images of ${title}`}
-        width={150}
-        height={150}
-        className="rounded object-cover h-[5rem] w-[5rem]"
-      />
-      <h1 className="text-lg font-bold">{title}</h1>
-      <p className="text-block overflow-hidden max-h-[50px]">{description}</p>
-    </div>
+    <>
+      <div className=" flex flex-col items-start justify-start px-4 py-6 bg-whitesmoke-200 dark:bg-white text-black rounded-lg laptop:max-w-[200px] laptop:min-w-[150px]">
+        <Image
+          src={imageUrl}
+          alt={`images of ${title}`}
+          width={40}
+          height={40}
+          className=" object-cover h-[2.5rem] w-[2.5rem]"
+        />
+        <h1 className="mt-4 text-sm text-start">{title}</h1>
+        <p className="mt-2 text-sm text-center text-gray-700 dark:text-gray-400 line-clamp-2">
+          {description}
+        </p>
+      </div>
+    </>
   );
 };
 

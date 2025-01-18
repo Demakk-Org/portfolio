@@ -7,29 +7,29 @@ const ProjectSection = () => {
   const {
     filteredProjects,
     selectedSkill,
-    setSelectedSkill,
     isLoading,
     error,
     allSkills,
-  } = useProjectData();
+    setSelectedSkill,
+  } = useProjectData({ itemQuantity: 3 });
 
   return (
     <section
       id="projects"
-      className="flex flex-col items-center justify-center dark:text-white px-[5%] tablet:px-[10%] desktop:px-[17%]"
+      className="flex flex-col items-center justify-center pt-[10%]  dark:text-white px-[5%] tablet:px-[10%] desktop:px-[17%]"
     >
-      <h1 className="text-3xl tablet:text-6xl mb-0">My Projects</h1>
+      <h1 className="text-3xl tablet:text-3xl mb-0">My Projects</h1>
       <p className=" tablet:px-[100px]">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ipsam
         a tempore sapiente, nobis labore atque, corrupti rerum itaque unde neque
         fugit eos similique quasi odio quo laudantium, minus sunt.
       </p>
-      <div className="flex gap-3 p-2">
+      <div className="flex flex-wrap justify-start gap-x-3 gap-y-2 tablet:gap-3 tablet:p-2">
         {allSkills.map((skill, index) => (
           <button
             key={index}
             onClick={() => setSelectedSkill(skill)}
-            className={`px-5 py-3 text-lg font-poppins rounded-lg ${
+            className={` flex px-3 py-2 tablet:px-5 tablet:py-3 font-poppins rounded-lg tablet:text-sm ${
               selectedSkill === skill
                 ? "bg-darkorange-100"
                 : "bg-whitesmoke-200 dark:bg-white text-black dark:hover:bg-gainsboro-200"

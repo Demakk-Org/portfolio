@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchFirestoreData } from "../components/lib/firebase-crud/fetch-data";
+import { fetchFirestoreCollection } from "../components/lib/firebase-crud/collection-fetcher";
 
 export interface TestimonialType {
   id?: string;
@@ -9,14 +9,14 @@ export interface TestimonialType {
   feedback: string;
 }
 
-const useTestimonialData = () => {
+const useTestimonialData = ({ itemQuantity }: { itemQuantity: number }) => {
   const [data, setData] = useState<TestimonialType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchFirestoreData<TestimonialType>("testimonials", 5)
+    fetchFirestoreCollection<TestimonialType>("testimonials", itemQuantity)
       .then(({ collectionData, error }) => {
         if (error !== null) {
           setError(error);
