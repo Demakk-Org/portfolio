@@ -32,7 +32,7 @@ jobs:
           npm install
           git reset --hard
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.3
         with:
           server: ftp://yourserver.com
           username: ${{ secrets.FTP_USERNAME }}
