@@ -3,7 +3,6 @@
 import Link from "next/link";
 import useSocialMediaPlatformData from "../../hooks/useSocialMediaPlatformData";
 import Image from "next/image";
-import socialMediaImagePlaceholder from "../../public/social-media-platform-fallback/3135715.png";
 
 const SocialMediaPlatformLinks = () => {
   const { data } = useSocialMediaPlatformData({
@@ -21,7 +20,7 @@ const SocialMediaPlatformLinks = () => {
             rel="noopener noreferrer"
           >
             <Image
-              src={socialMedia.imageUrl || socialMediaImagePlaceholder}
+              src={socialMedia.imageUrl}
               alt={`${socialMedia.name} logo`}
               width={100}
               height={100}
