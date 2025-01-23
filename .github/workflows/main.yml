@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Use Node.js 16
+      - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
@@ -37,3 +37,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          localDir: ./build
+          remoteDir: /home/ephremes
