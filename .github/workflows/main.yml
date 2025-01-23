@@ -17,6 +17,13 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Set Environment Variables
+        run: |
+          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> $GITHUB_ENV
+
       - name: Install Dependencies
         run: npm ci
 
@@ -35,9 +42,10 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/  # Replace `dist` with your actual output folder
-          server-dir: /public_html/  # Ensure this matches your FTP directory structure
+          server-dir: /public_html/
           create-dir: true
         env:
           FTP_DEBUG: true
+
 
 
