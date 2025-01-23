@@ -48,7 +48,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/  # Ensure the correct path to your built files
           server-dir: /public_html/  # Path on your FTP server
-          create-dir: true  # Automatically create the directory if it doesn’t exist
         env:
           FTP_DEBUG: true
 
