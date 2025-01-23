@@ -28,8 +28,7 @@ jobs:
         id: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os Solution:
-Ensure that the dependencies are correctly }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os Solution:Ensure that the dependencies are correctly }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
         if: steps.cache installed and the project is correctly built before-node-modules.outputs.cache-hit != 'true'
