@@ -37,7 +37,7 @@ jobs:
           server: ftp://yourserver.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html
+          server-dir: /public_html/
         env:
          FTP_DEBUG: true
 
