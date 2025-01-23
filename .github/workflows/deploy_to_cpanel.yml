@@ -32,6 +32,8 @@ jobs:
           git reset --hard
 
       - name: 📂 Build Project
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: npm run build || { echo "npm run build failed"; exit 1; }
 
       - name: 📂 Sync folders and files to the server
