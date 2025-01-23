@@ -6,8 +6,9 @@ on:
 jobs:
   FTP-Deploy-Action:
     name: 🎉 Deploy
-    runs-on:### Analysis:
-The failure occurs during the `npm install ubuntu-latest
+    runs-on:
+    ###
+    Analysis: The failure occurs during the `npm install ubuntu-latest
 
     steps:
       - name: 🚚 Get latest code
