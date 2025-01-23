@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Use Node.js 18
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '16'
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
@@ -27,19 +27,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: |
-          npm install || { echo "npm install failed"; exit 1; }
+          npm install
           git reset --hard
-
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-        continue-on-error: true
-
-      - name: 🛠 Log error details
-        if: failure()
-        run: echo "An error occurred during the FTP upload."
