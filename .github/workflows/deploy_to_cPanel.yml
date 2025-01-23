@@ -6,7 +6,7 @@ on:
 jobs:
   FTP-Deploy-Action:
     name: 🎉 Deploy
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: 🚚 Get latest code
@@ -14,52 +14,10 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name### Analysis:
-The failure occurs during the `npm run build` step due to a Firebase authentication error (`: Use Node.js 16
-        uses: actions/setup-node@auth/invalid-api-key`).
-
-### Suggested Solution:
-Ensure that the Firebase API key is properly set andv3
-        with:
-          node-version: valid in your environment variables. Update the workflow to include the necessary environment variables.
-
- '16'
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v3
-        id: cache-node-modules
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json### Updated Workflow:
-Here is an updated version of the workflow to include the Firebase API key:
-
-```yaml
-name: 🚀 Deploy File to cPanel
-on:
-  push:
-    branches:
-      - main
-jobs:
-  FTP-Deploy-Action:
-   ') }}
-
-      - name: 🔨 Install Dependencies
-        name: 🎉 Deploy
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: |
-          npm install || { echo "npm install failed"; exit 1; }
-          git reset -- - name: Use Node.js 20
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16'
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
@@ -69,33 +27,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: |
-          npm install || { echo "npm install failed"; exit 1; }
+          npm install
           git reset --hard
-
-      - name: 📂 Build Project
-       hard
-
-      - name: Verify Firebase API Key
-        run: |
-          if [ -z "${{ secrets.FIREBASE_API_KEY }}" ]; then
-            echo "Firebase API Key is missing"; exit 1;
-          fi
-
-      - name: 📂 Build Project
-        run: npm run build || { echo " env:
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-        run: npm run build || { echo "npm run build failed"; exit 1; }
-
-      - name: 📂 Sync folders and files to the server
-npm run build failed"; exit 1; }
-
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
