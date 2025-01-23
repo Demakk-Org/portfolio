@@ -27,10 +27,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
-          npm install
+          npm install || { echo "npm install failed"; exit 1; }
           git reset --hard
+
+      - name: 📂 Build Project
+        run: npm run build || { echo "npm run build failed"; exit 1; }
+
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
