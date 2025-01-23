@@ -6,9 +6,7 @@ on:
 jobs:
   FTP-Deploy-Action:
     name: 🎉 Deploy
-    runs-on:
-    ###
-    Analysis: The failure occurs during the `npm install ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 🚚 Get latest code
@@ -16,33 +14,25 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Use Node.js` step. The logs indicate that the error happens after 16
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
       - name: Cache npm dependencies
-        uses: actions/cache@ replacing the `app/globals.css` file.
-
-### Suggestedv3
+        uses: actions/cache@v3
         id: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os Solution:Ensure that the dependencies are correctly }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.cache installed and the project is correctly built before-node-modules.outputs.cache-hit != 'true'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: |
-          npm install || { echo "npm install failed"; exit 1; }
+          npm install
           git reset --hard
-
-      - name: 📂 Build Project
-        run: npm run build || { deployment. Handle potential errors during the `npm install echo "npm run build failed"; exit 1; }
-
       - name: 📂 Sync folders and files to the server
-        uses: Sam` step more gracefully.
-
-### Updated WorkflowKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
