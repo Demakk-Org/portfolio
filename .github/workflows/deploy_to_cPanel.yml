@@ -32,6 +32,9 @@ jobs:
           npm install || { echo "npm install failed"; exit 1; }
           git reset --hard
 
+      - name: 📂 Build Project
+        run: npm run build || { echo "npm run build failed"; exit 1; }
+
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
