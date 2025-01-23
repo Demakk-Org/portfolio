@@ -27,13 +27,19 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
-          npm install
+          npm install || { echo "npm install failed"; exit 1; }
           git reset --hard
+
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+        continue-on-error: true
+
+      - name: 🛠 Log error details
+        if: failure()
+        run: echo "An error occurred during the FTP upload."
