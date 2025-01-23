@@ -38,7 +38,7 @@ jobs:
          username: ${{ secrets.FTP_USERNAME }}
          password: ${{ secrets.FTP_PASSWORD }}
          localDir: ./build
-         remoteDir: /path/to/remote
+         remoteDir: /home/ephremes
          debug: true
          gitFtpIgnore: true
          mkdir: true
