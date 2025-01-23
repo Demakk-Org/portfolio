@@ -6,7 +6,7 @@ on:
 jobs:
   FTP-Deploy-Action:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: 🚚 Get latest code
@@ -27,10 +27,11 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔨 Install Dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
-          npm install
+          npm install || { echo "npm install failed"; exit 1; }
           git reset --hard
+
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
