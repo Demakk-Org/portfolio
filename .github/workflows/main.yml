@@ -19,7 +19,7 @@ jobs:
       
     - name: 🔨 Build Project
       env:
-        FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
       run: |
         npm install
         npm run build
