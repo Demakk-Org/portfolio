@@ -30,7 +30,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/
+          local-dir: /out/
           server-dir: /public_html/portfolio_repo/
           exclude: |
             **/.git*
@@ -39,9 +39,3 @@ jobs:
             **/node_modules/**
         env:
           FTP_DEBUG: true
-
-      - name: Copy public and static files to standalone
-        run: |
-          cp -r public .next/standalone/ ;
-          cp -r .next/static .next/standalone/static
-        shell: pwsh
