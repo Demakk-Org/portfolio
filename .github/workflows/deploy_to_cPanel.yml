@@ -30,18 +30,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: .next/
+          local-dir: .next/standalone
           server-dir: /public_html/portfolio_repo/
-          include: |
-           **/*.next
-           **/package.json
-           **/server.js
-           **/static
           exclude: |
-           **/.git*
-           **/.git*/**
-           **/node_modules/**
-           **/test/**
-           **/temp/**
+            **/.git*
+            **/.git*/**
+            **/test/**
+            **/temp/**
         env:
           FTP_DEBUG: true
