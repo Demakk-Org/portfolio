@@ -35,6 +35,8 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
+            **/.github/**
+            **/node_modules/**
             **/test/**
             **/temp/**
         env:
