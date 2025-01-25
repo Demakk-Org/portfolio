@@ -39,3 +39,9 @@ jobs:
             **/node_modules/**
         env:
           FTP_DEBUG: true
+
+      - name: Copy public and static files to standalone
+        run: |
+          cp -r public .next/standalone/ ;
+          cp -r .next/static .next/standalone/static
+        shell: pwsh
