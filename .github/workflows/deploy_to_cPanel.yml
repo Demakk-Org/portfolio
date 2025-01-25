@@ -37,7 +37,5 @@ jobs:
             **/.git*/**
             **/.github/**
             **/node_modules/**
-            **/test/**
-            **/temp/**
         env:
           FTP_DEBUG: true
