@@ -38,7 +38,7 @@ jobs:
           FTP_DEBUG: true
 
       - name: Copy public and static files to standalone
+        shell: bash
         run: |
-         cp -r public .next/standalone/ ;
-         cp -r .next/static .next/standalone/static
-        shell: pwsh
+            cp -r public .next/standalone/
+            cp -r .next/static .next/standalone/static
