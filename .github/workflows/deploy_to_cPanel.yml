@@ -30,7 +30,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/standalone/
+          local-dir: .next/
           server-dir: /public_html/portfolio_repo/
           exclude: |
             **/.git*
