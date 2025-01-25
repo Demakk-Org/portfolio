@@ -33,9 +33,6 @@ jobs:
           local-dir: .next/standalone/
           server-dir: /public_html/portfolio_repo/
           exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
             **/node_modules/**
         env:
           FTP_DEBUG: true
