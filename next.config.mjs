@@ -2,15 +2,17 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    output: "export",
     remotePatterns: [
       {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
         port: "",
+        pathname: "/**",
       },
     ],
   },
+  output: "export",
+  trailingSlash: true,
 };
 
 export default nextConfig;
