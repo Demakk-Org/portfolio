@@ -10,9 +10,8 @@ const nextConfig = {
       },
     ],
   },
-  output: "export",
-  compress: true,
-  productionBrowserSourceMaps: false,
+  // output: "export",
+  trailingSlash: true,
 };
 
 export default nextConfig;
