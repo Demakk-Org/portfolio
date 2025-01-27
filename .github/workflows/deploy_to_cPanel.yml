@@ -30,8 +30,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/standalone/
-          server-dir: /portfolio/
+          local-dir: ./out/
+          server-dir: /public_html/
           exclude: |
             **/node_modules/**
         env:

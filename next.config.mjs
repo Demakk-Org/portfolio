@@ -2,6 +2,8 @@
 const nextConfig = {
   images: {
     unoptimized: true,
+    output: "export",
+    trailingSlash: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -10,8 +12,6 @@ const nextConfig = {
       },
     ],
   },
-  output: "standalone",
-  trailingSlash: true,
 };
 
 export default nextConfig;
