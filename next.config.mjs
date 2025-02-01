@@ -11,7 +11,7 @@ const nextConfig = {
       },
     ],
   },
-  output: "export",
+  output: "standalone",
   trailingSlash: true,
 };
 
