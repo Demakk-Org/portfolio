@@ -30,17 +30,11 @@ jobs:
           npm install
           npm run build
 
-      - name: Prepare Standalone Output
-        run: |
-          mkdir -p .next/standalone/.next/static
-          cp -r public .next/standalone/
-          cp -r .next/static .next/standalone/.next/
-
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./.next/standalone/
-          server-dir: ./portfolio/
+          local-dir: ./out/
+          server-dir: /public_html/
