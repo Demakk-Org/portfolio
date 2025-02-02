@@ -11,6 +11,8 @@ const nextConfig = {
       },
     ],
   },
+  swcMinify: true,
+  productionBrowserSourceMaps: false,
   output: "standalone",
   trailingSlash: true,
 };
