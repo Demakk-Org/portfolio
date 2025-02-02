@@ -36,11 +36,15 @@ jobs:
           zip -r ../out.zip .
           cd ..
 
+      - name: 🗜️ Unzip out folder
+        run: |
+          unzip out.zip -d out_unzipped/
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out.zip/
+          local-dir: ./out_unzipped/
           server-dir: /public_html/
